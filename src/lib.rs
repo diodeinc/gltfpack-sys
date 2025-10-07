@@ -1,3 +1,13 @@
+//! Rust bindings for meshoptimizer/gltfpack
+//!
+//! This crate provides bindings to [meshoptimizer](https://github.com/zeux/meshoptimizer)'s
+//! gltfpack functionality for compressing glTF/GLB files.
+//!
+//! ## Attribution
+//!
+//! This crate bundles meshoptimizer v0.25 by Arseny Kapoulkine, licensed under MIT.
+//! See the NOTICE file for full license text.
+
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
