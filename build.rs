@@ -3,28 +3,32 @@ use std::path::PathBuf;
 fn main() {
     let meshopt_dir = PathBuf::from("meshoptimizer");
 
-    // Build meshoptimizer library
-    let meshopt_lib = cmake::Config::new(&meshopt_dir)
-        .define("MESHOPT_BUILD_DEMO", "OFF")
-        .define("MESHOPT_BUILD_GLTFPACK", "OFF")
-        .define("MESHOPT_BUILD_SHARED_LIBS", "OFF")
-        .build();
-
-    // Tell cargo to link meshoptimizer
-    println!(
-        "cargo:rustc-link-search=native={}/lib",
-        meshopt_lib.display()
-    );
-    println!("cargo:rustc-link-lib=static=meshoptimizer");
-
-    // Compile gltf sources
     let mut build = cc::Build::new();
     build
         .cpp(true)
         .flag_if_supported("-std=c++11")
+        .define("GLTFFUZZ", None) // Skip main() function in gltfpack.cpp
         .include(&meshopt_dir)
         .include(meshopt_dir.join("src"))
         .include(meshopt_dir.join("extern"))
+        // meshoptimizer core
+        .file(meshopt_dir.join("src/allocator.cpp"))
+        .file(meshopt_dir.join("src/clusterizer.cpp"))
+        .file(meshopt_dir.join("src/indexanalyzer.cpp"))
+        .file(meshopt_dir.join("src/indexcodec.cpp"))
+        .file(meshopt_dir.join("src/indexgenerator.cpp"))
+        .file(meshopt_dir.join("src/overdrawoptimizer.cpp"))
+        .file(meshopt_dir.join("src/partition.cpp"))
+        .file(meshopt_dir.join("src/quantization.cpp"))
+        .file(meshopt_dir.join("src/rasterizer.cpp"))
+        .file(meshopt_dir.join("src/simplifier.cpp"))
+        .file(meshopt_dir.join("src/spatialorder.cpp"))
+        .file(meshopt_dir.join("src/stripifier.cpp"))
+        .file(meshopt_dir.join("src/vcacheoptimizer.cpp"))
+        .file(meshopt_dir.join("src/vertexcodec.cpp"))
+        .file(meshopt_dir.join("src/vertexfilter.cpp"))
+        .file(meshopt_dir.join("src/vfetchoptimizer.cpp"))
+        // gltfpack
         .file(meshopt_dir.join("gltf/animation.cpp"))
         .file(meshopt_dir.join("gltf/encodebasis.cpp"))
         .file(meshopt_dir.join("gltf/encodewebp.cpp"))

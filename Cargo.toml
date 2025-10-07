@@ -34,7 +34,6 @@ features = ["derive"]
 optional = true
 
 [build-dependencies]
-cmake = "0.1"
 cc = "1.0"
 
 [package.metadata.docs.rs]
