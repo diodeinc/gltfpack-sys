@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 fn main() {
-    let meshopt_dir = PathBuf::from("vendor/meshoptimizer");
+    let meshopt_dir = PathBuf::from("meshoptimizer");
 
     // Build meshoptimizer library
     let meshopt_lib = cmake::Config::new(&meshopt_dir)
@@ -51,6 +51,5 @@ fn main() {
     build.compile("gltfpack");
 
     // Rerun if wrapper changes
-    println!("cargo:rerun-if-changed=wrapper.h");
     println!("cargo:rerun-if-changed=wrapper.cpp");
 }

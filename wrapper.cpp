@@ -1,5 +1,4 @@
-#include "vendor/meshoptimizer/gltf/gltfpack.h"
-#include "wrapper.h"
+#include "../meshoptimizer/gltf/gltfpack.h"
 
 // Forward declarations
 extern Settings defaults();
@@ -7,6 +6,7 @@ extern int gltfpack(const char* input, const char* output, const char* report, S
 
 extern "C" {
 
+// Compress with maximum compression (equivalent to gltfpack -cc)
 int compress(const char* input, const char* output) {
     Settings settings = defaults();
     settings.compress = true;
