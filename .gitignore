@@ -3,3 +3,4 @@
 *.gltf
 *.bin
 .DS_Store
+Cargo.lock
