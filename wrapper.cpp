@@ -11,6 +11,7 @@ int compress(const char* input, const char* output) {
     Settings settings = defaults();
     settings.compress = true;
     settings.compressmore = true;
+    settings.col_bits = 16;  // Use 16 bits for colors to preserve quality
     return gltfpack(input, output, NULL, settings);
 }
 
